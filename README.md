@@ -6,7 +6,11 @@ Grupo Cuervos
 Integrantes
 
 Benay, Franco
+
 Danielis, Mateo
+
 Oliva, Emmanuel
+
 Poerio, Santiago
+
 Prediger, Misael
