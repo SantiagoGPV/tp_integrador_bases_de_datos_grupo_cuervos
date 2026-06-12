@@ -2,7 +2,9 @@
 Trabajo Practico integrador a entregar para la materia de Bases de Datos 2026
 
 Grupo Cuervos
+
 Integrantes
+
 Benay, Franco
 Danielis, Mateo
 Oliva, Emmanuel
