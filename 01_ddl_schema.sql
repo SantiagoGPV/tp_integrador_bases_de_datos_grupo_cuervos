@@ -1,3 +1,4 @@
+CREATE DATABASE tpIntegradorCuervos;
 USE tpIntegradorCuervos;
 
 CREATE TABLE GENERO (
