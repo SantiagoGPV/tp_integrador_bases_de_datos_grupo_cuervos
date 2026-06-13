@@ -14,7 +14,6 @@ AFTER INSERT ON prestamo FOR EACH ROW
 END; 
 DELIMITER ;
 
---------------------------------------------------------------------------------------------------------------------------
 
 DELIMITER //
 -- Recalcula stock_disponible luego de actualizar el prestamo
@@ -37,4 +36,12 @@ END
 DELIMITER ;
 
 --------------------------------------------------------------------------------------------------------------------
+
+DELIMITER //
+-- Cambia estado del SOCIO a 'SUSPENDIDO' automáticamente.
+CREATE TRIGGER trg_estado_socio 
+AFTER 
+
+DELIMITER ; 
+
 --------------------------------------------------------------------------------------------------------------------
