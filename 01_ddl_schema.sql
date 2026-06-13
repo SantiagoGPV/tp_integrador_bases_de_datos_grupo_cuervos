@@ -91,6 +91,16 @@ CREATE TABLE PRESTAMO (
 );
 
 
+CREATE TABLE AUDITORIA_PRESTAMOS (
+    id_auditoria INT AUTO_INCREMENT PRIMARY KEY,
+    id_prestamo INT NOT NULL,
+    accion VARCHAR(10) NOT NULL, -- 'INSERT', 'UPDATE' o 'DELETE'
+    estado_anterior VARCHAR(20),
+    estado_nuevo VARCHAR(20),
+    fecha_cambio DATETIME NOT NULL,
+    usuario_bd VARCHAR(100) NOT NULL
+);
+
 CREATE INDEX idx_busqueda_dni ON SOCIO(dni);
 CREATE INDEX idx_busqueda_email ON SOCIO(email);
 -- El ISBN ya es PK en LIBRO, lo indexamos en EJEMPLAR donde es FK. Acelera Joins con Libro
