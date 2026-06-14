@@ -36,12 +36,43 @@ END
 DELIMITER ;
 
 --------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 
 DELIMITER //
 -- Cambia estado del SOCIO a 'SUSPENDIDO' automáticamente.
-CREATE TRIGGER trg_estado_socio 
-AFTER 
+
 
 DELIMITER ; 
 
 --------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+DELIMITER //
+
+-- 1. TRIGGER PARA EL INSERT (AFTER INSERT)
+CREATE TRIGGER trg_audit_prestamo_insert
+AFTER INSERT ON PRESTAMO
+FOR EACH ROW
+BEGIN
+    INSERT INTO Auditoria_prestamo (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
+    VALUES (NEW.id_prestamo, 'INSERT', NULL, NEW.estado, NOW(), USER());
+END//
+
+-- 2. TRIGGER PARA EL UPDATE (AFTER UPDATE)
+CREATE TRIGGER trg_audit_prestamo_update
+AFTER UPDATE ON PRESTAMO
+FOR EACH ROW
+BEGIN
+    INSERT INTO Auditoria_prestamo (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
+    VALUES (NEW.id_prestamo, 'UPDATE', OLD.estado, NEW.estado, NOW(), USER());
+END//
+
+-- 3. TRIGGER PARA EL DELETE (AFTER DELETE)
+CREATE TRIGGER trg_audit_prestamo_delete
+AFTER DELETE ON PRESTAMO
+FOR EACH ROW
+BEGIN
+    INSERT INTO Auditoria_prestamo (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
+    VALUES (OLD.id_prestamo, 'DELETE', OLD.estado, NULL, NOW(), USER());
+END//
+
+DELIMITER ;
