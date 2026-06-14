@@ -41,6 +41,17 @@ DELIMITER ;
 DELIMITER //
 -- Cambia estado del SOCIO a 'SUSPENDIDO' automáticamente.
 
+CREATE TRIGGER trg_estado_socio_after_sancion
+AFTER INSERT ON SANCION
+FOR EACH ROW
+BEGIN
+    -- Actualizamos el estado del socio al que se le aplicó la sanción
+    UPDATE SOCIO 
+    SET estado = 'SUSPENDIDO' 
+    WHERE id_socio = NEW.id_socio;
+END//
+
+
 
 DELIMITER ; 
 
