@@ -41,7 +41,7 @@ DELIMITER ;
 DELIMITER //
 -- Cambia estado del SOCIO a 'SUSPENDIDO' automáticamente.
 
-CREATE TRIGGER trg_estado_socio_after_sancion
+CREATE TRIGGER trg_estado_socio
 AFTER INSERT ON SANCION
 FOR EACH ROW
 BEGIN
