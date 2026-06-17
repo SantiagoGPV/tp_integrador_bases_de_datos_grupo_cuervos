@@ -11,11 +11,11 @@ AFTER INSERT ON prestamo FOR EACH ROW
      -- Como la tabla 'prestamo' solo tiene el 'id_ejemplar' (NEW.id_ejemplar),
      -- usamos esa subconsulta para viajar a la tabla 'ejemplar', buscar a qué libro 
      -- pertenece ese ejemplar, bajarnos su 'isbn' y así poder actualizar el libro correcto.
-END; 
-DELIMITER ;
+END//
 
 
-DELIMITER //
+
+
 -- Recalcula stock_disponible luego de actualizar el prestamo
 CREATE TRIGGER trg_actualizar_stock_update
 AFTER UPDATE ON prestamo FOR EACH ROW 
@@ -31,7 +31,7 @@ BEGIN
         SET stock_disponible = stock_disponible - 1
         WHERE isbn = (SELECT isbn FROM ejemplar WHERE id_ejemplar = NEW.id_ejemplar);  -- ('ACTIVO', 'DEVUELTO', 'VENCIDO')
     END IF;
-END
+END//
 
 DELIMITER ;
 
