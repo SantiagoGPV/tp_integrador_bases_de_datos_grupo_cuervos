@@ -73,8 +73,10 @@ CREATE TRIGGER trg_audit_prestamo_update
 AFTER UPDATE ON PRESTAMO
 FOR EACH ROW
 BEGIN
+  IF OLD.estado != NEW.estado THEN
     INSERT INTO Auditoria_prestamo (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
     VALUES (NEW.id_prestamo, 'UPDATE', OLD.estado, NEW.estado, NOW(), USER());
+  END IF;
 END//
 
 -- 3. TRIGGER PARA EL DELETE (AFTER DELETE)
