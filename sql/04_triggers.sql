@@ -64,7 +64,7 @@ CREATE TRIGGER trg_audit_prestamo_insert
 AFTER INSERT ON PRESTAMO
 FOR EACH ROW
 BEGIN
-    INSERT INTO Auditoria_prestamo (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
+    INSERT INTO Auditoria_prestamos (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
     VALUES (NEW.id_prestamo, 'INSERT', NULL, NEW.estado, NOW(), USER());
 END//
 
@@ -74,7 +74,7 @@ AFTER UPDATE ON PRESTAMO
 FOR EACH ROW
 BEGIN
   IF OLD.estado != NEW.estado THEN
-    INSERT INTO Auditoria_prestamo (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
+    INSERT INTO Auditoria_prestamos (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
     VALUES (NEW.id_prestamo, 'UPDATE', OLD.estado, NEW.estado, NOW(), USER());
   END IF;
 END//
@@ -84,7 +84,7 @@ CREATE TRIGGER trg_audit_prestamo_delete
 AFTER DELETE ON PRESTAMO
 FOR EACH ROW
 BEGIN
-    INSERT INTO Auditoria_prestamo (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
+    INSERT INTO Auditoria_prestamos (id_prestamo, accion, estado_anterior, estado_nuevo, fecha_cambio, usuario_bd)
     VALUES (OLD.id_prestamo, 'DELETE', OLD.estado, NULL, NOW(), USER());
 END//
 
